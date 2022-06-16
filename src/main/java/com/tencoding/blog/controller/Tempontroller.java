@@ -12,7 +12,8 @@ public class Tempontroller {
 		// 리턴명 : /home.html
 		
 		System.out.println("tempHome()");
-		return "/home.html";
+		return "/home.html";  // "/"를 꼭 넣어주야 한다 안넣으면 src/main/resources/statichome.html로 인식한다.
+		// 리턴명 : /home.html
 	}
 
 }
