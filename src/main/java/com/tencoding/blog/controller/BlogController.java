@@ -18,5 +18,10 @@ public class BlogController {
 	public String hello() {
 		return "<h1>hello Spring Boot</h1>";
 	}
+	
+	@GetMapping("/h1")
+	public String h1() {
+		return "ssssss";
+	}
 
 }

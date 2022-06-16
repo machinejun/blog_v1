@@ -36,10 +36,10 @@ public class Reply {
 
 	@ManyToOne
 	@JoinColumn(name = "userId")
-	private User userId;
+	private User user;
 
 	@ManyToOne // 여러개의 댓글은 하나의 게시글에 존재할 수 있다.
 	@JoinColumn(name = "boardId")
-	private Board boardId;
+	private Board board;
 
 }

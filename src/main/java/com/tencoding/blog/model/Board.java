@@ -47,19 +47,19 @@ public class Board {
 
 	// Many <-- 자기자신 , One <-- User >>> 여러개의 게시글은 하나의 유저를 가진다.
 	// 하나의 작성글에 두개 이상의 유저를 가질수가 없다.
-	@ManyToOne(fetch = FetchType.EAGER)  
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId")
 	private User userId;
 	// EAGER 전략 >> Board select 할때 한번에 데이터를 가지고 온다.
-	// LAZY 전략 >> 
-	
+	// LAZY 전략 >> 필요할 떄 다시 요청해서 이놈만 들고 올 수 있다.
+
 	// 댓글 정보 << 하나의 게시글에 여러개의 리플이 있을 수 있다.
 	// one = Board, Many = reply
 	// mappedBy = "board" 는 reply 테이블에 필드 이름이다.
-	// mappedBy =  연관관계의 주인이 아니다. (FK가 아니다)
+	// mappedBy = 연관관계의 주인이 아니다. (FK가 아니다)
 	// DB에 컬럼을 만들지 마세요
-	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)   
+
+	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
 	private List<Reply> reply;
-	
 
 }
