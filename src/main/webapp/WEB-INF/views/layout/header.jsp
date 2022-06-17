@@ -17,13 +17,15 @@ pageEncoding="UTF-8"%>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    
   </head>
   <body>
+  	<div id="box">반가워</div>
     <nav
       class="navbar navbar-expand-md bg-dark navbar-dark"
     >
       <!-- Brand -->
-      <a class="navbar-brand" href="#"
+      <a class="navbar-brand" href="/blog"
         >JunicBlog</a
       >
 
@@ -46,12 +48,12 @@ pageEncoding="UTF-8"%>
       >
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#"
+            <a class="nav-link" href="/blog/user/login_form"
               >로그인</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"
+            <a class="nav-link" href="/blog/user/join_form"
               >회원가입</a
             >
           </li>
@@ -59,5 +61,11 @@ pageEncoding="UTF-8"%>
       </div>
     </nav>
     <br/>
+    
+    <script type="text/javascript">
+    	let el_box = document.querySelector("#box");
+    	el_box.textContent = "hello";
+    </script>
+    <!-- 헤더에 있으면 안되는 이유는 ?? -->
     
     
