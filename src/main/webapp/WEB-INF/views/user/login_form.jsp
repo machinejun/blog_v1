@@ -3,7 +3,6 @@ contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> <%@ include
 file="../layout/header.jsp" %>
 
-<h1>로그인 폼</h1>
 <div class= "container">
     <form action="#">
       <div class="form-group">
@@ -21,6 +20,7 @@ file="../layout/header.jsp" %>
     </form>
 </div>
 <br/>
+
 
 <%@ include file="../layout/footer.jsp"
 %>
