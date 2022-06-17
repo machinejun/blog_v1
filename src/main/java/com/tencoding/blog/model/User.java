@@ -4,11 +4,12 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
@@ -39,7 +40,7 @@ public class User {
 	private Timestamp createDate;
 
 	// 도메인 -- 데이터의 범주화 (User, users ... ) = 도메인(값들의 집합)이 된다.
-	@ColumnDefault("'user'")
-	private String role; // Enum 타입 사용 권장 : admin, user, manager
+	@Enumerated(EnumType.STRING)
+	private RoleType role; // Enum 타입 사용 권장 : admin, user, manager
 
 }
