@@ -1,3 +1,4 @@
+<!-- 최상위 오브젝트는 document -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,6 +6,39 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>안녕하세요</h1>
+	<p id="demo" name ="pName"></p>
+	
+	<script type="text/javascript">
+	/*
+		Html 요소에 접근하는 가장 일반적인 방법은 id값으로 접근한다.
+		innerHTML : 요소의 내용을 가져오는 가장 쉬운 방법
+		가져오거나 변경하는데 사용할 수 있다.
+		
+		HTML 요소 찾기
+		1. document.getElementByid("id")
+		2. document.getElementByTagName("name")
+		3. document.getElementByClassName("name")
+		
+		대표적인 동적 사항
+		
+		1. 요소 변경 : 
+			let element = document.getElementById(id);
+			element.innerHTML = new html content;     // 생성, 변경
+			element.attribute = new value;			  // 생성, 변경
+			element.style.property = new style;        // 새로운 스타일 생성, 변경
+			element.setAttribute(attribute, value);
+		
+		2. 요소 추가 & 삭제 :
+			document.createElement(element)    // HTML 생성
+			document.removeChild(element)      // remove Html
+			document.appendChild(element)	   // add Html
+			document.replaceChild(new, old)	   // replace html
+			document.write(text)			   // outputStream html
+			
+		3. 이벤트 핸들러 추가
+			document.getElementById(id).onclick = function(){ 이벤트 동작 code .... }
+	*/
+		document.getElementById("demo").innerHTML = "hello World";
+	</script>
 </body>
 </html>
