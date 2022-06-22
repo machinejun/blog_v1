@@ -65,7 +65,7 @@ pageEncoding="UTF-8"%>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  href="/blog/user/login_form"
+                  href="/saveform"
                   >글쓰기</a>
               </li>
               <li class="nav-item">
@@ -88,4 +88,4 @@ pageEncoding="UTF-8"%>
     </script>
     <!-- 헤더에 있으면 안되는 이유는 ?? -->
   </body>
-</html>
+

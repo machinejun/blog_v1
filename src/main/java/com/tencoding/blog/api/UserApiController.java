@@ -19,7 +19,10 @@ import com.tencoding.blog.service.UserService;
 public class UserApiController {
 	
 	@Autowired
-	UserService userService;
+	private UserService userService;
+	@Autowired
+	private HttpSession session;
+	
 	
 	@PostMapping("/user")
 	public ResponseDto<Integer> save(@RequestBody User user) {
@@ -31,8 +34,9 @@ public class UserApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), result);
 	}
 	
+	// HttpSession : 내장 객체 
 	@PostMapping("/user/login")
-	public ResponseDto<Integer> login(@RequestBody User user, HttpSession session){
+	public ResponseDto<Integer> login(@RequestBody User user){
 		System.out.println("login 호출됨!!!!!!!");
 		// 서비스에게 요청
 		
@@ -43,6 +47,7 @@ public class UserApiController {
 		if(principal != null) {
 			session.setAttribute("principal", principal);
 			System.out.println("세션정보가 저장되었습니다");
+			System.out.println(session.getAttribute("principal"));
 		}
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
