@@ -1,9 +1,8 @@
 package com.tencoding.blog.service;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tencoding.blog.model.User;
 import com.tencoding.blog.repository.UserRepository;
@@ -42,6 +41,12 @@ public class UserService {
 			e.printStackTrace();
 			return -1;
 		}
+	}
+	
+	@Transactional(readOnly = true)
+	public User loginUser(User user) {
+		// 레파지토리 select
+		return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
 	}
 	
 	

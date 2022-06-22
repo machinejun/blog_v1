@@ -27,7 +27,8 @@ public class User {
 	@Id // primary key 설정
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에 연결된 DB의 넘버링 전략을 따라가겠다.
 	private int id;
-	@Column(nullable = false, length = 30)
+	
+	@Column(nullable = false, length = 30, unique = true)
 	private String username;
 
 	@Column(nullable = false, length = 100)
@@ -43,4 +44,5 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private RoleType role; // Enum 타입 사용 권장 : admin, user, manager
 
+	
 }

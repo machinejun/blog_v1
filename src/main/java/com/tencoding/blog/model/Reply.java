@@ -31,15 +31,14 @@ public class Reply {
 	@Column(nullable = false, length = 200)
 	private String content;
 
-	@CreationTimestamp
-	private Timestamp createDate;
-
-	@ManyToOne
-	@JoinColumn(name = "userId")
-	private User user;
-
 	@ManyToOne // 여러개의 댓글은 하나의 게시글에 존재할 수 있다.
 	@JoinColumn(name = "boardId")
 	private Board board;
 
+	@ManyToOne
+	@JoinColumn(name = "userId") // <---- Reply 테이블에 컬럼명이 된다.
+	private User user;
+
+	@CreationTimestamp
+	private Timestamp createDate;
 }

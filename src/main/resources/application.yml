@@ -20,7 +20,7 @@ spring:
     password: 1q2w3e4r5t!
     
   jpa:
-    open-in-view: true
+    open-in-view: true   
     hibernate:
       ddl-auto: update
       naming:

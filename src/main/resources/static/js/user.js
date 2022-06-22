@@ -5,6 +5,11 @@ let index = {
 			alert("btn-save 버튼이 눌러졌습니다")
 			this.save();
 		});
+		
+		$("#btn-login").bind("click ", () => {
+			alert("btn-login 버튼이 눌러졌습니다")
+			this.login();
+		});
 	},
 	
 	save: function(){
@@ -36,6 +41,31 @@ let index = {
 			console.log(error);
 			console.log(status);
 			alert("회원가입에 실패하였습니다");
+		});
+	},
+	
+	login: function() {
+		let data = {
+			username: $("#username").val(),
+			password: $("#password").val()
+		}
+		
+		//ajax 호출
+		$.ajax({
+			// 회원 로그인 요청 -> get(기록에 남는다, 유출 위험성 높아짐), post를 사용해야한다.
+			type: "POST",
+			url: "/blog/api/user/login",
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8", 
+			dataType: "json"
+		}).done(function(data, textStatus, xhr) {
+			alert("로그인이 완료되었습니다.");
+			console.log(data);
+			location.href ="/blog";
+			
+		}).fail(function(error) {
+			alert("로그인에 실패하였습니다");
+			console.log(error);
 		});
 		
 	}

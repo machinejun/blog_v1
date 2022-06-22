@@ -16,4 +16,14 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	// select
 	// update
 	// delete
+	
+	// spring JPA 네이밍 전략
+	// select * from user where username = ?1 and password = ?2;
+	// 테이블 네이밍 규칙(물음표 친구들)
+	User findByUsernameAndPassword(String username, String password);
+	
+	
+	
+	
+	
 }

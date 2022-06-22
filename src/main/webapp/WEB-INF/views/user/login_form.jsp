@@ -13,14 +13,11 @@ file="../layout/header.jsp" %>
       <div class="form-group">
         <label for="password">password:</label>
         <input type="password" class="form-control" placeholder="Enter password" id="password">
-      </div>
-
-
-      <button type="button" class="btn btn-primary">로그인</button>
+      </div> 
     </form>
+     <button id="btn-login" type="button" class="btn btn-primary">로그인</button>
 </div>
 <br/>
+<script src="/blog/js/user.js"></script>
 
-
-<%@ include file="../layout/footer.jsp"
-%>
+<%@ include file="../layout/footer.jsp"%>
