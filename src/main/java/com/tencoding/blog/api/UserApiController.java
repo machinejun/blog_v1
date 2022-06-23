@@ -39,20 +39,12 @@ public class UserApiController {
 	@PostMapping("/user/login")
 	public ResponseDto<Integer> login(@RequestBody User user){
 		System.out.println("login 호출됨!!!!!!!");
-		// 서비스에게 요청
-		
-		// principal ( 접근 주체 )
 		User principal = userService.loginUser(user);
-		// 정상적으로 접근주체의 username, password가 확인이 되었으면
-		// 세션이라는 거대한 메모리에 저장
 		if(principal != null) {
 			session.setAttribute("principal", principal);
 			System.out.println("세션정보가 저장되었습니다");
 			System.out.println(session.getAttribute("principal"));
 		}
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
-	}
-	
-	
-		
+	}	
 }

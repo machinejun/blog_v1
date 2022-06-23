@@ -26,7 +26,10 @@ public class UserController {
 	
 	@GetMapping("/logout")
 	public String logout() {
+		// 세션 정보를 제거 로그아웃 처리
+		// 새로운 페이지(처음 화면)로 갈수있게 처리
 		httpSession.invalidate();
 		return "redirect:/";
+		// rediret
 	}
 }
