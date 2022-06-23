@@ -71,7 +71,7 @@ pageEncoding="UTF-8"%>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  href="/blog/user/join_form"
+                  href="/blog/user/logout"
                   >로그아웃</a>
               </li>
             </c:otherwise>
