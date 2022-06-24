@@ -58,13 +58,13 @@ pageEncoding="UTF-8"%>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  href="/login_form"
+                  href="/auth/login_form"
                   >로그인</a>
               </li>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  href="/join_form"
+                  href="/auth/join_form"
                   >회원가입</a>
               </li>
             </c:when>

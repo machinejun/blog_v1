@@ -13,17 +13,17 @@ public class UserController {
 	@Autowired
 	HttpSession httpSession;
 	
-	@GetMapping("/login_form")
+	@GetMapping("/auth/login_form")
 	public String loginForm(){
 		return "/user/login_form";
 	}
 	
-	@GetMapping("/join_form")
+	@GetMapping("/auth/join_form")
 	public String joinForm() {
 		return "/user/join_form";
 	}
 	
-	@GetMapping("/logout")
+	@GetMapping("/auth/logout")
 	public String logout() {
 		// 세션 정보를 제거 로그아웃 처리
 		// 새로운 페이지(처음 화면)로 갈수있게 처리

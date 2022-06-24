@@ -1,9 +1,11 @@
 package com.tencoding.blog.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tencoding.blog.model.RoleType;
 import com.tencoding.blog.model.User;
 import com.tencoding.blog.repository.UserRepository;
 
@@ -29,25 +31,34 @@ public class UserService {
 	@Autowired    // 자동으로 초기화
 	private UserRepository userRepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder encode;
+	
 	@Transactional
 	public int saveUser(User user) {
 		//select
 		//update
 		//insert
 		try {
-			userRepository.save(user);
-			return 1;
+			String rawPassword = user.getPassword();
+			String encPassword = encode.encode(rawPassword);
+			user.setPassword(encPassword);
+			user.setRole(RoleType.USER);
+			userRepository.save(user);		
 		} catch (Exception e) {
 			e.printStackTrace();
 			return -1;
 		}
+		return 1;
 	}
 	
-	@Transactional(readOnly = true)
-	public User loginUser(User user) {
-		// 레파지토리 select
-		return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-	}
+//	@Transactional(readOnly = true)
+//	public User loginUser(User user) {
+//		// 레파지토리 select
+//		return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+//	}
+	
+	
 	
 	
 	

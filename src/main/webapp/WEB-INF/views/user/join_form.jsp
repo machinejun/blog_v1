@@ -4,14 +4,15 @@ pageEncoding="UTF-8"%> <%@ include
 file="../layout/header.jsp" %>
 
 <div class="container">
-  <form >
+  <form action="/auth/joinProc" method="post">
     <div class="form-group">
       <label for="username">user name:</label>
       <input
         type="text"
         class="form-control"
         placeholder="Enter username"
-        id="username"/>
+        id="username"
+        name="username"/>
     </div>
 
     <div class="form-group">
@@ -20,7 +21,8 @@ file="../layout/header.jsp" %>
         type="password"
         class="form-control"
         placeholder="Enter password"
-        id="password"/>
+        id="password"
+        name="password"/>
     </div>
 
     <div class="form-group">
@@ -29,16 +31,20 @@ file="../layout/header.jsp" %>
         type="email"
         class="form-control"
         placeholder="Enter email"
-        id="email"/>
+        id="email"
+        name="email"/>
     </div>
-  </form>
-     <button
-      type="button"
+    <button
+      type="submit"
       class="btn btn-primary"
       id= "btn-save">
       회원가입
     </button>
+  </form>
+     
 </div>
 <br/>
+<!--  
 <script src="/js/user.js"></script>
+-->
 <%@ include file="../layout/footer.jsp"%>
