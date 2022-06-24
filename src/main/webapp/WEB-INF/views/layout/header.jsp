@@ -20,14 +20,14 @@ pageEncoding="UTF-8"%>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
-    <div id="box">반가워</div>
+
     <nav
       class="navbar navbar-expand-md bg-dark navbar-dark"
     >
       <!-- Brand -->
       <a
         class="navbar-brand"
-        href="/blog"
+        href="/"
         >JunicBlog</a>
       <!-- Toggler/collapsibe Button -->
       <button
@@ -51,13 +51,13 @@ pageEncoding="UTF-8"%>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  href="/blog/user/login_form"
+                  href="/login_form"
                   >로그인</a>
               </li>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  href="/blog/user/join_form"
+                  href="/join_form"
                   >회원가입</a>
               </li>
             </c:when>
@@ -65,13 +65,20 @@ pageEncoding="UTF-8"%>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  href="/saveform"
+                  href="/board/form"
                   >글쓰기</a>
               </li>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  href="/blog/user/logout"
+                  href="/user/form"
+                  >회원정보</a>
+              </li>
+              <li class="nav-item">
+              <!--  시큐리티를 이용하면 자동 로그아웃이 된다. -->
+                <a
+                  class="nav-link"
+                  href="/logout"
                   >로그아웃</a>
               </li>
             </c:otherwise>

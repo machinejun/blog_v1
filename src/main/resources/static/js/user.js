@@ -24,7 +24,7 @@ let index = {
 		$.ajax({
 			// 서버측에 회원가입 요청
 			type: "POST",
-			url: "/blog/api/user",
+			url: "/api/user",
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=utf-8",
 			dataType: "json" // 응답이 왔을 때 기본 데이터 타입(Buffered 문자열) -> javaScrpit object 자동 변환
@@ -35,7 +35,7 @@ let index = {
 			console.log("data: " + data);
 			console.log("textStatus: " + textStatus);
 			alert("회원가입이 완료되었습니다"); // 얼마가 걸릴지 모른다.
-			location.href ="/blog"; 
+			location.href ="/"; 
 		}).fail(function(error, status){
 			// 통신 실패시
 			console.log(error);
@@ -54,7 +54,7 @@ let index = {
 		$.ajax({
 			// 회원 로그인 요청 -> get(기록에 남는다, 유출 위험성 높아짐), post를 사용해야한다.
 			type: "POST",
-			url: "/blog/api/user/login",
+			url: "/api/user/login",
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=utf-8", 
 			dataType: "json"

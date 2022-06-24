@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%> <%@ include
 file="../layout/header.jsp" %>
 
 <div class="container">
-  <form action="#">
+  <form >
     <div class="form-group">
       <label for="username">user name:</label>
       <input
@@ -40,5 +40,5 @@ file="../layout/header.jsp" %>
     </button>
 </div>
 <br/>
-<script src="/blog/js/user.js"></script>
+<script src="/js/user.js"></script>
 <%@ include file="../layout/footer.jsp"%>
