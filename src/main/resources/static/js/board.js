@@ -7,6 +7,10 @@ let index = {
 		$("#btn-delete").bind("click", () => {
 			this.deleteById();
 		});
+		
+		$("#btn-detail-update").bind("click", () => {
+			this.update();
+		});
 	},
 	
 	save: function() {
@@ -52,6 +56,36 @@ let index = {
 		}).fail(function(error){
 			alert("삭제 실패");
 		})
-	}
+	},
+	
+	update: function() {
+		// 데이터 가져오기
+		
+		let boardId = $("#id").val();
+		let data = {
+			title: $("#title").val(),
+			content: $("#content").val()
+			
+		}
+		console.log("버튼 클릭");
+		console.log(data);
+		
+		$.ajax({
+			type: "PUT",
+			url: "/api/board/" + boardId,
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			async: false // 동기 통신
+		}).done(function(data){
+			if(data.status == 200){
+				alert("글 수정 완료\n"+ "title: " + data.data.title + "\n" + "content: complete change" );
+				location.href="/";
+			}
+			
+		}).fail(function(error){
+			alert("글 수정 실패")
+		})
+	},
 }
 index.init();

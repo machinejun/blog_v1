@@ -22,7 +22,6 @@
 	</ul>		
 	<br/>	
 	</div>
-
 <%@ include file="layout/footer.jsp" %>
 	
 	

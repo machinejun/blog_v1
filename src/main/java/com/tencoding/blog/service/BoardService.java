@@ -3,6 +3,7 @@ package com.tencoding.blog.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,5 +39,16 @@ public class BoardService {
 	@Transactional
 	public void deleteById(int id) {
 		boardRepository.deleteById(id);
+	}
+	
+	@Transactional
+	@Modifying
+	public Board modifyBoard(int id, Board board) {
+		Board boardEntity = boardRepository.findById(id).orElseThrow(() -> {
+			return new IllegalArgumentException("해당글은 찾을 수 없습니다.");
+		});
+		boardEntity.setTitle(board.getTitle());
+		boardEntity.setContent(board.getContent());
+		return boardEntity;
 	}
 }
