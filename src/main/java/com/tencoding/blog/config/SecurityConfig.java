@@ -1,14 +1,18 @@
 package com.tencoding.blog.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@Configuration // bean 등록(IOC)
+import com.tencoding.blog.auth.PrincipalDetailService;
+
+@Configuration// bean 등록(IOC)
 @EnableWebSecurity // 시큐리티 필터로 등록이 된다. (필터 커스텀)
 @EnableGlobalMethodSecurity(prePostEnabled = true)  // 특정주소로 접근하면 권한 및 인증 처리를 미리 체크하겠다.	
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
@@ -23,6 +27,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		return new BCryptPasswordEncoder();
 	}
 	
+	@Autowired
+	private PrincipalDetailService pricipalDetailService;
+	
+	
 	/* 2. 특정 주서 필터를 설정할 예정
 	 */
 	@Override
@@ -33,9 +41,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.permitAll()
 		.anyRequest()
 		.authenticated()
-		.and()
+	.and()
 		.formLogin()
-		.loginPage("/auth/login_form"); // 허용이 되지 않은 사용자가 오면 강제로 로그인 페이즈로 보낸다.
+		.loginPage("/auth/login_form") // 허용이 되지 않은 사용자가 오면 강제로 로그인 페이즈로 보낸다.
+		.loginProcessingUrl("/auth/loginProc")
+		.defaultSuccessUrl("/"); 
 	}
+		// 시프링 시큐리티가 해동 주소로 요청이 오면 가로채서 대신 로그인 처리를 해준다.
+		// 단 이 동작하기 위해서는 만들어야할 클래스가 있다.
+		// UserDetails type Object를 만들어야 한다.
+		// username 이 존재여부 확인, password hash알고리즘 알려주기 
+	
+	//3. 시큐리티가 대신 로그인을 해주는데 password를 가로채서 해당 패스워드가 무엇으로 해쉬처리되었는지 함수를
+	//	알려주어야 한다. 같은 해쉬로 암호화 해서 db에 해시값과 비교할 수 있다.
+	
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		// 1. 유저 디테일 서비스에 들어갈 오브젝트를 만들어 주어야한다.
+		// 2. passwordEncoder에 우리가 사용하는 해쉬 함수를 알려주어야 한다.
+		
+		auth.userDetailsService(pricipalDetailService).passwordEncoder(encodePWD());
+	}
+	
 
 }
