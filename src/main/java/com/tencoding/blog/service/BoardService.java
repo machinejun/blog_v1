@@ -22,14 +22,21 @@ public class BoardService {
 		boardRepository.save(board);
 	}
 	
+	@Transactional(readOnly = true)
 	public Page<Board> getBoardList(Pageable pageable){
 		return boardRepository.findAll(pageable);
 	}
-
+	
+	@Transactional(readOnly = true)
 	public Board boardDetail(int id) {
 		return boardRepository.findById(id).orElseThrow(() -> {
 			return new IllegalArgumentException("해당글은 찾을 수 없습니다.");
 		});
 		
+	}
+	
+	@Transactional
+	public void deleteById(int id) {
+		boardRepository.deleteById(id);
 	}
 }
