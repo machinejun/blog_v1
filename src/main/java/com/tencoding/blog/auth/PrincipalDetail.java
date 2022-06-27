@@ -8,10 +8,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.tencoding.blog.model.User;
 
+import lombok.Data;
+
+@Data
 public class PrincipalDetail implements UserDetails{
 
 	/**
-	 * 
+	 * 하나라도 false가 되면 작동 안됨 
 	 */
 	private static final long serialVersionUID = 1L;
 	

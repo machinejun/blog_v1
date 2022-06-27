@@ -24,7 +24,10 @@ pageEncoding="UTF-8"%>
     <!-- Popper JS -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
   </head>
   <body>
 
@@ -72,13 +75,13 @@ pageEncoding="UTF-8"%>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  href="/board/form"
+                  href="/board/save_form"
                   >글쓰기</a>
               </li>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  href="/user/form"
+                  href="/user/update_form"
                   >회원정보</a>
               </li>
               <li class="nav-item">
@@ -94,12 +97,6 @@ pageEncoding="UTF-8"%>
       </div>
     </nav>
     <br />
-
-    <script type="text/javascript">
-      let el_box =
-        document.querySelector("#box");
-      el_box.textContent = "hello";
-    </script>
     <!-- 헤더에 있으면 안되는 이유는 ?? -->
   </body>
 
