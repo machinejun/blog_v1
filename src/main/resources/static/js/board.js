@@ -38,6 +38,7 @@ let index = {
 			
 		}).fail(function(error){
 			alert("글쓰기 실패")
+			
 		})
 	},
 	

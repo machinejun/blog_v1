@@ -13,8 +13,12 @@ import lombok.Data;
 @Data
 public class PrincipalDetail implements UserDetails{
 
-	/**
-	 * 하나라도 false가 되면 작동 안됨 
+	/*
+	 * 모든 클래스는 UID(고유 식별자)를 가지고 있다.
+	 * class의 내용이 변경이 되면 UID값 역시 값이 변경된다 = hashCode
+	 * 직렬화 하여 통신하고 UID값으로 통신한게 정상인지 확인을 하는데 
+	 * 그 값이 바뀌게 되면 다른 class로 인식을 해버릴 가능성이 있다. >> 권장사항이다.
+	 * 이를 방지하기 위해서 고유값으로 미리 명시를 해주는 부분이 바로 serialVersionUID 이다.
 	 */
 	private static final long serialVersionUID = 1L;
 	
@@ -25,6 +29,9 @@ public class PrincipalDetail implements UserDetails{
 		this.user = user;
 	}
 
+	/**
+	 * 하나라도 false가 되면 작동 안됨 
+	 */
 
 	@Override
 	public String getPassword() {
