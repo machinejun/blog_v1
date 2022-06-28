@@ -1,9 +1,7 @@
 package com.tencoding.blog.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +31,8 @@ public class UserService {
 	// DI : 의존 주입
 	@Autowired    // 자동으로 초기화
 	private UserRepository userRepository;
+	@Autowired
+	private AuthenticationManager authenticationManager;
 	
 	@Autowired
 	private BCryptPasswordEncoder encode;
@@ -63,11 +63,10 @@ public class UserService {
 		userEntity.setPassword(encode.encode(user.getPassword()));
 		userEntity.setEmail(user.getEmail());
 		
+//		Authentication authentication = AuthenticationManager.authenticate(new UsernamePasswordAuthenticationToken(, userEntity))
 		
-		/*
-		 * 회원 정보 수정하기 로직을 완성 & 처리 완료 -> DB데이터가 변경되었더라도 세션에 저장되어 있는
-		 * 객체 정보는 수정이 되지 않는다.
-		 */
+		
+		
 		return 1;
 	}
 	

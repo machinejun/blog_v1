@@ -1,7 +1,6 @@
 package com.tencoding.blog.config;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,15 +9,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import com.tencoding.blog.auth.PrincipalDetailService;
 
@@ -40,6 +41,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private PrincipalDetailService pricipalDetailService;
 	
+	@Bean  // 메모리에 등록
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception{
+		return super.authenticationManagerBean();
+	}
 	/* 2. 특정 주서 필터를 설정할 예정
 	 */
 	@Override
@@ -48,10 +54,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.authorizeRequests() // 요청에 대한 보안검사 시작
 		.antMatchers("/","/js/**","/css/**", "/image/**" ,"/auth/**").permitAll() // 아래와 같은 주소체계는 모두 허용한다.
 		.anyRequest().authenticated() // 어떠한 요청에도 보안검사 실행
-	.and()
+		.and()
 		.formLogin() // 보안검증은 form login으로 하겠다.
-		.loginPage("/auth/login_form") // 허용이 되지 않은 사용자가 오면 강제로 로그인 페이즈로 보낸다.
-		.loginProcessingUrl("/auth/loginProc")
+		.loginPage("/auth/login_form") // 허용이 되지 않은 사용자가 오면 강제로 로그인 페이지로 보낸다.
+		.loginProcessingUrl("/auth/loginProc") // 로그인 처리 api 주소 설정
 		.defaultSuccessUrl("/")
 		.failureHandler(new AuthenticationFailureHandler() {
 			

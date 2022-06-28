@@ -3,12 +3,19 @@ package com.tencoding.blog.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.tencoding.blog.dto.ResponseDto;
+import com.tencoding.blog.model.User;
+import com.tencoding.blog.service.UserService;
 
 @Controller
 public class UserController {
+	@Autowired
+	UserService service;
 	
 	@Autowired
 	HttpSession httpSession;
@@ -36,5 +43,14 @@ public class UserController {
 	public String updateForm() {
 		return "/user/update_form";
 	}
+	
+	@PostMapping("/auth/joinProc")
+	// 스프링 데이터 기본 파싱 전략 key = value 구조
+	// application/x-www-form-urlencoded;charset=UTF-8
+	public String save(User user){
+		int result = service.saveUser(user);
+		return "redirect:/";
+	}
+	
 	
 }

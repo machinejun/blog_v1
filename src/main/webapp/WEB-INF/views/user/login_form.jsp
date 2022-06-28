@@ -15,7 +15,10 @@ file="../layout/header.jsp" %>
         <label for="password">password:</label>
         <input type="password" class="form-control" name = "password" placeholder="Enter password" id="password">
       </div>
-      <button id="btn-login" type="submit" class="btn btn-primary">로그인</button> 
+      <button id="btn-login" type="submit" class="btn btn-primary">로그인</button>
+      <a href="https://kauth.kakao.com/oauth/authorize?client_id=1550477d27cd178f856e5f3e0da6a93b&redirect_uri=http://localhost:9090/auth/kakao/callback&response_type=code" >
+      	<img alt="" src="/image/kkabutton.png" width="76" height="40">
+      </a> 
     </form>
      
 </div>
