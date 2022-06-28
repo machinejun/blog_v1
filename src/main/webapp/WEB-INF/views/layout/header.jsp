@@ -82,7 +82,7 @@ pageEncoding="UTF-8"%>
                 <a
                   class="nav-link"
                   href="/user/update_form"
-                  >회원정보</a>
+                  >회원정보 수정</a>
               </li>
               <li class="nav-item">
               <!--  시큐리티를 이용하면 자동 로그아웃이 된다. -->

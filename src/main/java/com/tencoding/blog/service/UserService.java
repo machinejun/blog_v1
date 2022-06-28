@@ -1,6 +1,9 @@
 package com.tencoding.blog.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,6 +52,22 @@ public class UserService {
 			e.printStackTrace();
 			return -1;
 		}
+		return 1;
+	}
+	
+	@Transactional
+	public int updateUser(User user) {
+		User userEntity = userRepository.findById(user.getId()).orElseThrow(() -> {
+			return new RuntimeException("업데이트가 실패하였습니다.");
+		});
+		userEntity.setPassword(encode.encode(user.getPassword()));
+		userEntity.setEmail(user.getEmail());
+		
+		
+		/*
+		 * 회원 정보 수정하기 로직을 완성 & 처리 완료 -> DB데이터가 변경되었더라도 세션에 저장되어 있는
+		 * 객체 정보는 수정이 되지 않는다.
+		 */
 		return 1;
 	}
 	
