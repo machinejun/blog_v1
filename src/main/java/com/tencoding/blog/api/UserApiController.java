@@ -22,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.tencoding.blog.dto.ResponseDto;
 import com.tencoding.blog.model.KakaoProfile;
+import com.tencoding.blog.model.RoleType;
 import com.tencoding.blog.model.TokenKakao;
 import com.tencoding.blog.model.User;
 import com.tencoding.blog.service.UserService;
@@ -96,6 +97,14 @@ public class UserApiController {
 		ResponseEntity<TokenKakao> response = rt.exchange("https://kauth.kakao.com/oauth/token", HttpMethod.POST, kakaoTokenRequest, TokenKakao.class);
 		String token = response.getBody().getAccessToken();
 		
+		
+		User user = getProfile(token);
+
+		return "";
+	}
+
+	
+	private User getProfile(String token) {
 		RestTemplate rt2 = new RestTemplate();
         HttpHeaders headers2 = new HttpHeaders();
         // 주의 Bearer 다음에 무조건 한칸 띄우기!!!!!!!!!!!!!!!!!!!!
@@ -105,25 +114,11 @@ public class UserApiController {
         HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest = new HttpEntity<>(headers2);
         ResponseEntity<KakaoProfile> reponse2 = rt2.exchange("https://kapi.kakao.com/v2/user/me", HttpMethod.POST, kakaoProfileRequest, KakaoProfile.class);
         System.out.println(reponse2);
-        
-        
-		
-		
-//		RestTemplate restTemplate = new RestTemplate();
-//		HttpHeaders header = new HttpHeaders();
-//		header.add("Authorization", "Bearer " + token);
-//		header.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-//		
-//		HttpEntity<MultiValueMap<String, String>> kakaoProfileRequests = new HttpEntity<>(header);
-//		
-//		
-//		ResponseEntity<String> responseEntitiy = restTemplate.exchange("https://kapi.kakao.com/v2/user/me/",
-//				HttpMethod.POST, kakaoProfileRequests,
-//				String.class);
-		
-		
-		
-		return ">>" + reponse2 + "    nickname : " + reponse2.getBody().getProperties().getNickname() + "  email : " + reponse2.getBody().getKakaoAccount().getEmail();
+		User user = new User();
+		user.setUsername(reponse2.getBody().getProperties().getNickname());
+		user.setEmail(reponse2.getBody().getKakaoAccount().getEmail());
+		user.setRole(RoleType.USER);
+		return user;
 	}
 	
 	

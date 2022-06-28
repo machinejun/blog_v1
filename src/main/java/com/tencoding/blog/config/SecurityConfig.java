@@ -60,7 +60,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.loginProcessingUrl("/auth/loginProc") // 로그인 처리 api 주소 설정
 		.defaultSuccessUrl("/")
 		.failureHandler(new AuthenticationFailureHandler() {
-			
 			@Override
 			public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 					AuthenticationException exception) throws IOException, ServletException {
