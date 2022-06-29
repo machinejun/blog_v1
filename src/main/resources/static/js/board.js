@@ -112,17 +112,38 @@ let index = {
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
 			
-		}).done(function(response){
+		}).done(function(res){
+			if(res.status == 200){
+				addReplyElement(res.data);
+			}else{
+				
+			}
+			console.log(res.data);
+			
+			/*
 			if(response.status){
 				alert("댓글작성 완료");
 				location.href=`/board/${data.boardId}`;
 			}
+			*/
 			
 		}).fail(function(error){
-			alert("글쓰기 실패")
+			alert("댓글 작성 실패")
 			
 		})
 		
 	}
+}
+
+function addReplyElement(reply) {
+	let childElement = `<li class="list-group-item d-flex justify-content-between" id="reply--1">
+  				<div> ${reply.content }</div>
+  				<div class="">
+  					<div>작성자 : ${reply.user.username} &nbsp;&nbsp;</div>
+  					<button class="badge badge-danger ">삭제</button>
+  				</div>
+  			</li>`;
+  	
+  	$("#reply--box").prepend(childElement)
 }
 index.init();
