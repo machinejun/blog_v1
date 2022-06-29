@@ -62,7 +62,7 @@ public class Board {
 	
 	// mappedBy 안하면 테이블 생성됨 board_reply ㅋㅋㅋㅋㅋㅋ 개열받네
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
-	private List<Reply> reply;
+	private List<Reply> replys;
 	
 	
 
