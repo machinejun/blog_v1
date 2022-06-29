@@ -8,13 +8,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tencoding.blog.model.Board;
+import com.tencoding.blog.model.Reply;
 import com.tencoding.blog.model.User;
 import com.tencoding.blog.repository.BoardRepository;
+import com.tencoding.blog.repository.ReplyRepository;
 
 @Service
 public class BoardService {
 	@Autowired
 	private BoardRepository boardRepository;
+	@Autowired
+	private ReplyRepository replyRepository;
+	
 	
 	@Transactional
 	public void write(Board board, User user) {  // title, content, 
@@ -50,5 +55,17 @@ public class BoardService {
 		boardEntity.setTitle(board.getTitle());
 		boardEntity.setContent(board.getContent());
 		return boardEntity;
+	}
+	
+	@Transactional
+	public void writeReply(User user, int BoardId, Reply requestReply) {
+		Board boardEntitiy = boardRepository.findById(BoardId).orElseThrow(() -> {
+			return new IllegalArgumentException("댓글 쓰기 실패: 존재하지 않은 게시글");
+		});
+		
+		
+		requestReply.setUser(user);
+		requestReply.setBoard(boardEntitiy);
+		replyRepository.save(requestReply);
 	}
 }

@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -62,6 +64,7 @@ public class Board {
 	
 	// mappedBy 안하면 테이블 생성됨 board_reply ㅋㅋㅋㅋㅋㅋ 개열받네
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+	@JsonIgnoreProperties({"board","user"})  // reply안에 있는 board getter 무시해라 = 값을 가지고 오지 않는다. 무한 참조 막기
 	private List<Reply> replys;
 	
 	

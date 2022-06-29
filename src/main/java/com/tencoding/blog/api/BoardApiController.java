@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tencoding.blog.auth.PrincipalDetail;
 import com.tencoding.blog.dto.ResponseDto;
 import com.tencoding.blog.model.Board;
+import com.tencoding.blog.model.Reply;
 import com.tencoding.blog.service.BoardService;
 
 @RestController
@@ -42,4 +43,12 @@ public class BoardApiController {
 		Board newboard =boardService.modifyBoard(id, board);
 		return new ResponseDto<Board>(HttpStatus.OK.value(), newboard);
 	}
+	
+	@PostMapping("/api/board/{boardId}/reply")
+	public ResponseDto<Integer> saveReply(@PathVariable int boardId,@RequestBody Reply reply,@AuthenticationPrincipal PrincipalDetail detail){
+		//서비스에 넘겨서 데이터 처리
+		boardService.writeReply(detail.getUser(), boardId, reply);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
+
 }

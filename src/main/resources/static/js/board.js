@@ -11,6 +11,10 @@ let index = {
 		$("#btn-detail-update").bind("click", () => {
 			this.update();
 		});
+		
+		$("#btn-reply-save").bind("click", () => {
+			this.replySave();
+		});
 	},
 	
 	save: function() {
@@ -88,5 +92,37 @@ let index = {
 			alert("글 수정 실패")
 		})
 	},
+	
+	// `` 백틱(자바스크립트 변수를 문자열 안에 넣어서 사용할 수 있따.)
+	replySave: function() {
+		// 데이터 가져오기
+		let data = {
+			boardId: $("#board-id").text(), 
+			content: $("#reply-content").val(),
+			
+			
+		}
+		console.log("버튼 클릭");
+		console.log(data);
+		
+		$.ajax({
+			type: "POST",
+			url: `/api/board/${data.boardId}/reply`,
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+			
+		}).done(function(response){
+			if(response.status){
+				alert("댓글작성 완료");
+				location.href=`/board/${data.boardId}`;
+			}
+			
+		}).fail(function(error){
+			alert("글쓰기 실패")
+			
+		})
+		
+	}
 }
 index.init();
