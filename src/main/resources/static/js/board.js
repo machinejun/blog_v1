@@ -24,8 +24,10 @@ let index = {
 			content: $("#content").val(),
 			
 		}
-		console.log("버튼 클릭");
-		console.log(data);
+		if(data.title == ""){
+			alert("제목은 공백일수 없습니다.")
+			return;
+		}
 		
 		$.ajax({
 			type: "POST",
@@ -34,8 +36,9 @@ let index = {
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
 			
-		}).done(function(data, textStatus){
-			if(data.status == 200){
+		}).done(function(response){
+			if(response.status == 200){
+				console.log(response.data);
 				alert("글쓰기 완료");
 				location.href="/";
 			}
@@ -102,8 +105,10 @@ let index = {
 			
 			
 		}
-		console.log("버튼 클릭");
-		console.log(data);
+		if(data.content == ""){
+			alert("머라도 좀 쳐라");
+			return;
+		}
 		
 		$.ajax({
 			type: "POST",
@@ -115,7 +120,8 @@ let index = {
 		}).done(function(response){
 			if(response.status){
 				alert("댓글작성 완료");
-				location.href=`/board/${data.boardId}`;
+				console.log(response.data);
+				addReplyElemet(response.data);
 			}
 			
 		}).fail(function(error){
@@ -125,4 +131,17 @@ let index = {
 		
 	}
 }
+function addReplyElemet(reply){
+	let childElement = `<li class="list-group-item d-flex justify-content-between" id="reply--${reply.id}">
+  				<div> ${reply.content }</div>
+  				<div class="">
+  					<div>작성자 : ${reply.user.username} &nbsp;&nbsp;</div>
+  					<button class="badge badge-danger ">삭제</button>
+  				</div>
+  			</li>`;
+  	
+  	$("#reply--box").prepend(childElement);
+  	$("#reply-content").val("");
+}
+
 index.init();

@@ -2,7 +2,6 @@ let index = {
 	
 	init: function(){
 		$("#btn-save").bind("click ", () => {
-			alert("btn-save 버튼이 눌러졌습니다")
 			this.save();
 		});
 		
@@ -15,7 +14,6 @@ let index = {
 		*/
 		
 		$("#btn-update").bind("click ", () => {
-			alert("btn-login 버튼이 눌러졌습니다")
 			this.update();
 		});
 	},
@@ -26,7 +24,11 @@ let index = {
 			password: $("#password").val(),
 			email: $("#email").val()
 		}
-		//console.log(data);	
+		console.log(data);
+		if(data.username == "" || data.password == "" || data.email == ""){
+			alert("공백없이 입력해 주세요");
+			return;
+		}	
 		
 		//ajax 호출
 		$.ajax({
@@ -86,7 +88,13 @@ let index = {
 			password: $("#password").val(),
 			email: $("#email").val()
 		}
-		console.log(data);
+		
+		if(data.password == ""){
+			alert("비밀번호를 입력해주세요")
+			return;
+		}
+		
+		
 		$.ajax({
 			type:"PUT",
 			url: "/user",

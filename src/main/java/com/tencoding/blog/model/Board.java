@@ -3,6 +3,7 @@ package com.tencoding.blog.model;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
@@ -63,8 +65,9 @@ public class Board {
 	
 	
 	// mappedBy 안하면 테이블 생성됨 board_reply ㅋㅋㅋㅋㅋㅋ 개열받네
-	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties({"board","user"})  // reply안에 있는 board getter 무시해라 = 값을 가지고 오지 않는다. 무한 참조 막기
+	@OrderBy("id DESC")
 	private List<Reply> replys;
 	
 	
