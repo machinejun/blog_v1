@@ -1,7 +1,6 @@
 package com.tencoding.blog.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,9 +30,7 @@ public class UserService {
 	// DI : 의존 주입
 	@Autowired    // 자동으로 초기화
 	private UserRepository userRepository;
-	@Autowired
-	private AuthenticationManager authenticationManager;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder encode;
 	
@@ -68,6 +65,14 @@ public class UserService {
 		
 		
 		return 1;
+	}
+	
+	@Transactional(readOnly = true)
+	public User searchUser(String userName) {
+		User userEntity = userRepository.findByUsername(userName).orElseGet(() ->{
+			return new User();
+		});
+		return userEntity;
 	}
 	
 //	@Transactional(readOnly = true)

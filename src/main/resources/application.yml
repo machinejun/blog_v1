@@ -32,13 +32,21 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       use-new-id-generator-mappings: false
-    show-sql: true
+    show-sql: false
     properties:
       hibernate.format_sql: true
     
   jackson:
     serialization:
       fail-on-empty-beans: false
+      
+  security:
+    user:
+      name: test
+      password: 1234
+      
+teco:
+  key: CD016E3086B3B013A18A042A7B76F6CFDD3A1561DF8DCA08BBC2FD4116775BAA724CADB25BB98AE3FBCCFB71836D29B78E9AD3F64C672A7A5A41DF7565B5312F
       
 
 

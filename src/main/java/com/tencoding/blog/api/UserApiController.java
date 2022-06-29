@@ -1,34 +1,22 @@
 package com.tencoding.blog.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import com.tencoding.blog.dto.ResponseDto;
-import com.tencoding.blog.model.KakaoProfile;
-import com.tencoding.blog.model.RoleType;
-import com.tencoding.blog.model.TokenKakao;
 import com.tencoding.blog.model.User;
 import com.tencoding.blog.service.UserService;
 
 @RestController
 public class UserApiController {
+	
 	
 	@Autowired
 	private UserService userService;
@@ -68,58 +56,7 @@ public class UserApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
-	@GetMapping("/auth/kakao/callback")
-	@ResponseBody
-	public String loginFromKaKao(@RequestParam String code){
-		/*
-		 * httpUrlConnect
-		 * retrofit2
-		 * okHttp
-		 * RestTemplate
-		 * 
-		 */
-		// 1. header
-		RestTemplate rt = new RestTemplate();
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-		
-		// 2. body
-		MultiValueMap<String, String> params = new LinkedMultiValueMap<>() ;
-		params.add("grant_type", "authorization_code");
-		params.add("client_id", "1550477d27cd178f856e5f3e0da6a93b");
-		params.add("redirect_uri", "http://localhost:9090/auth/kakao/callback");
-		params.add("code", code);
-		
-		//3. 하나의 오브젝트로 담기
-		HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest = new HttpEntity<>(params,headers);
-		
-		//4.http 요청
-		ResponseEntity<TokenKakao> response = rt.exchange("https://kauth.kakao.com/oauth/token", HttpMethod.POST, kakaoTokenRequest, TokenKakao.class);
-		String token = response.getBody().getAccessToken();
-		
-		
-		User user = getProfile(token);
-
-		return "";
-	}
-
 	
-	private User getProfile(String token) {
-		RestTemplate rt2 = new RestTemplate();
-        HttpHeaders headers2 = new HttpHeaders();
-        // 주의 Bearer 다음에 무조건 한칸 띄우기!!!!!!!!!!!!!!!!!!!!
-        headers2.add("Authorization", "Bearer " + token);
-        headers2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-        // 바디 
-        HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest = new HttpEntity<>(headers2);
-        ResponseEntity<KakaoProfile> reponse2 = rt2.exchange("https://kapi.kakao.com/v2/user/me", HttpMethod.POST, kakaoProfileRequest, KakaoProfile.class);
-        System.out.println(reponse2);
-		User user = new User();
-		user.setUsername(reponse2.getBody().getProperties().getNickname());
-		user.setEmail(reponse2.getBody().getKakaoAccount().getEmail());
-		user.setRole(RoleType.USER);
-		return user;
-	}
 	
 	
 	

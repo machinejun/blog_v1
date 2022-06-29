@@ -1,4 +1,4 @@
-package com.tencoding.blog.model;
+package com.tencoding.blog.dto;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

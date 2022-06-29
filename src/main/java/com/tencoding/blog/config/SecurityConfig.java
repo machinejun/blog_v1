@@ -15,11 +15,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import com.tencoding.blog.auth.PrincipalDetailService;
 
@@ -27,9 +25,9 @@ import com.tencoding.blog.auth.PrincipalDetailService;
 @EnableWebSecurity // 시큐리티 필터로 등록이 된다. (필터 커스텀)
 @EnableGlobalMethodSecurity(prePostEnabled = true)  // 특정주소로 접근하면 권한 및 인증 처리를 미리 체크하겠다.	
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
-	/*
-	 * - 같이 처리할 수 있는 것
-	 * 1. 비밀번호 해쉬처리
+	/* 
+	 * Autentication 객체를 만들기 위해서는 ★ AuthenticationManger 이 친구가 필요하다.
+	 * 이친구를 만들기 위해서는 비밀번호 파싱 전략(encoder)과 user데이터 액세스 전략(userDetailService)이 필요하다.
 	 */
 	
 	// 해쉬처리
@@ -41,13 +39,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private PrincipalDetailService pricipalDetailService;
 	
-	@Bean  // 메모리에 등록
+	@Bean  // AuthenticationManager 메모리에 등록 얘를 사용할려면 adapter에서 만들어주어야한다.
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception{
 		return super.authenticationManagerBean();
 	}
-	/* 2. 특정 주서 필터를 설정할 예정
-	 */
+	
+	
+	// configure 메소드를 통해 어떤 요청에 대해서는 로그인을 요구하고, 어떤 요청에 대해서 로그인을 요구하지 않을지 설정한다.
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
@@ -78,8 +77,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	//3. 시큐리티가 대신 로그인을 해주는데 password를 가로채서 해당 패스워드가 무엇으로 해쉬처리되었는지 함수를
 	//	알려주어야 한다. 같은 해쉬로 암호화 해서 db에 해시값과 비교할 수 있다.
 	
+	
+	/**
+	 * 매니저 빌드
+	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		// AuthenticationManager 설정(passwordEncoder + userDetailService)s
 		// 1. 유저 디테일 서비스에 들어갈 오브젝트를 만들어 주어야한다.
 		// 2. passwordEncoder에 우리가 사용하는 해쉬 함수를 알려주어야 한다.
 

@@ -1,4 +1,4 @@
-package com.tencoding.blog.model;
+package com.tencoding.blog.dto;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -24,6 +24,8 @@ public class KakaoProfile {
 	@JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 	public class Properties{
 		private String nickname;
+		private String profileImage;
+		private String thumbnailImage;
 	}
 	
 	@Data
