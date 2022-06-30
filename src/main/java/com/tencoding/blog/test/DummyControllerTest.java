@@ -17,14 +17,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tencoding.blog.model.Board;
 import com.tencoding.blog.model.RoleType;
 import com.tencoding.blog.model.User;
 import com.tencoding.blog.repository.UserRepository;
+import com.tencoding.blog.service.BoardService;
 
 @RestController
 public class DummyControllerTest {
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private BoardService boardService;
 	
 	@PostMapping("/dummy/join")
 	public String join(@RequestBody User user) {
@@ -73,10 +77,10 @@ public class DummyControllerTest {
 	// 페이징 처리
 	// http://localhost:9090/blog/dummy/user?page=0
 	@GetMapping("/dummy/user")
-	public Page<User> pageList(@PageableDefault(size = 2, sort = "id"
+	public Page<Board> pageList(@PageableDefault(size = 4, sort = "id"
 	, direction = Direction.DESC) Pageable pageable){
 		// 원하는대로 리턴 하면 된다. list or page
-		return userRepository.findAll(pageable);
+		return boardService.getBoardList(pageable);
 	}
 	
 	@Transactional

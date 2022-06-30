@@ -18,6 +18,16 @@
 		<c:set var="isDisabled" value="disabled"></c:set>
 		<c:set var="isNotDisabled" value=""></c:set>
 		<li class="page-item ${pageable.first ? isDisabled : inNotDisabled }"><a class="page-link" href="?page=${pageable.number -1 }">◀</a></li>
+		<c:forEach var="num" items="${pagenumbers}">
+				<c:choose>
+					<c:when test="${num eq pageable.number}">
+						<li class="page-item active"><a class="page-link" href="?page=${num}">${num + 1}</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="?page=${num}">${num + 1}</a></li>
+					</c:otherwise>
+				</c:choose>
+		</c:forEach>
 		<li class="page-item ${pageable.last ? isDisabled : inNotDisabled }"><a class="page-link" href="?page=${pageable.number +1 }">▶</a></li>
 	</ul>		
 	<br/>	

@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 		.authorizeRequests() // 요청에 대한 보안검사 시작
-		.antMatchers("/","/js/**","/css/**", "/image/**" ,"/auth/**").permitAll() // 아래와 같은 주소체계는 모두 허용한다.
+		.antMatchers("/","/js/**","/css/**", "/image/**" ,"/auth/**", "/dummy/**").permitAll() // 아래와 같은 주소체계는 모두 허용한다.
 		.anyRequest().authenticated() // 어떠한 요청에도 보안검사 실행
 		.and()
 		.formLogin() // 보안검증은 form login으로 하겠다.

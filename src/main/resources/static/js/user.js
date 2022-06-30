@@ -25,8 +25,14 @@ let index = {
 			email: $("#email").val()
 		}
 		console.log(data);
-		if(data.username == "" || data.password == "" || data.email == ""){
-			alert("공백없이 입력해 주세요");
+		if(data.username == ""){
+			alert("username을 입력해주세요");
+			return;
+		}else if(data.password == ""){
+			alert("password을 입력해주세요");
+			return;
+		}else if(data.email == ""){
+			alert("email을 입력해주세요");
 			return;
 		}	
 		

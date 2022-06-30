@@ -129,19 +129,40 @@ let index = {
 			
 		})
 		
+	},
+	
+	replyDelete: function(boardId, replyId) {
+		console.log(boardId+ "+" + replyId);
+		$.ajax({
+			type: "DELETE",
+			url: `/api/board/${boardId}/reply/${replyId}`,
+			dataType:'json'
+		}).done(function(response){
+			alert("댓글 삭제 완료")
+			var tag = $("#hint").val();
+			console.log($('#' + tag));
+			$('#' + tag).remove;
+		}).fail(function(err){
+			console.log(err)
+		})
 	}
 }
 function addReplyElemet(reply){
-	let childElement = `<li class="list-group-item d-flex justify-content-between" id="reply--${reply.id}">
-  				<div> ${reply.content }</div>
+	let pricipalId = $("pricipaId").val();
+	let childElement = `<li class="list-group-item d-flex justify-content-between" id="reply--${reply.user.id}">
+  				<div> ${reply.content}</div>
+  				<input type="hidden" value="reply--${reply.user.id}" id="hint"></input>
   				<div class="">
   					<div>작성자 : ${reply.user.username} &nbsp;&nbsp;</div>
-  					<button class="badge badge-danger ">삭제</button>
+  					<c:if test="${reply.user.id == pricipalId }">
+  						<button class="badge badge-danger ml-5" onclick="index.replyDelete(${reply.board.id},${reply.id});">삭제</button>
+  					</c:if>
   				</div>
   			</li>`;
   	
   	$("#reply--box").prepend(childElement);
   	$("#reply-content").val("");
 }
+
 
 index.init();

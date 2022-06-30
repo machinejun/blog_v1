@@ -34,7 +34,7 @@
 		<div>
 			<div class="card-body"><textarea row="1" class="form-control" id="reply-content"></textarea></div>
 			<div class="card-footer">
-				<button class="btn btn-primary" type="button" id="btn-reply-save">등록</button>
+				<button class="btn btn-primary" type="button" id="btn-reply-save" onclick="">등록</button>
 			</div>
 		</div>
 	</div>
@@ -42,13 +42,21 @@
 	<div class="card">
 		<div class="card-header">댓글 목록</div>
 	</div>
+	<input type="hidden" value="${principal.user.id}" id="userid"></input>
 	<ul class="list-group list-group-flush" id="reply--box">
+	 
 		<c:forEach var="reply" items="${board.replys}">
 		  	<li class="list-group-item d-flex justify-content-between" id="reply--${reply.id}">
   				<div> ${reply.content }</div>
+  				<input type="hidden" value="reply--${reply.user.id}" id="hint"></input>
   				<div class="">
   					<div>작성자 : ${reply.user.username} &nbsp;&nbsp;</div>
-  					<button class="badge badge-danger ml-5" >삭제</button>
+  					<c:if test="${reply.user.id eq principal.user.id }">
+  						<button class="badge badge-danger ml-5" onclick="index.replyDelete(${board.id},${reply.id});">삭제</button>
+  					</c:if>
+  					
+  					<!-- 동적 페이지를 구성하려면 스크립트를 하면 먼저 스크립트가 렌더링되서 이벤트 리스너가 안먹힘 onclick 쓰자 -->
+  					
   				</div>
   			</li>
 		</c:forEach>

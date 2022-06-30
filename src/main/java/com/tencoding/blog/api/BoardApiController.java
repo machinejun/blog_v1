@@ -50,5 +50,14 @@ public class BoardApiController {
 		Reply replyEntity = boardService.writeReply(detail.getUser(), boardId, reply);
 		return new ResponseDto<Reply>(HttpStatus.OK.value(), replyEntity);
 	}
+	
+	@DeleteMapping("/api/board/{boardId}/reply/{replyId}")
+	public ResponseDto<String> deleteReply(@PathVariable int boardId, @PathVariable int replyId){
+		System.out.println("boardID : " + boardId);
+		System.out.println("replyID : " + replyId);
+		boardService.deleteReplyById(replyId);
+		return new ResponseDto<String>(HttpStatus.OK.value(), "ok");
+	}
+	
 
 }
