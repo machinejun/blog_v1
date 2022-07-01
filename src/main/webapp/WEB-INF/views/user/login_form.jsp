@@ -8,12 +8,12 @@ file="../layout/header.jsp" %>
     <form action="/auth/loginProc" method="post">
       <div class="form-group">
         <label for="username">user name:</label>
-        <input type="text" class="form-control" name = "username" placeholder="Enter username" id="username">
+        <input type="text" class="form-control" name = "username" placeholder="Enter username" id="username" value="tenco">
       </div>
 
       <div class="form-group">
         <label for="password">password:</label>
-        <input type="password" class="form-control" name = "password" placeholder="Enter password" id="password">
+        <input type="password" class="form-control" name = "password" placeholder="Enter password" id="password" value="asd123">
       </div>
       <button id="btn-login" type="submit" class="btn btn-primary">로그인</button>
       <a href="https://kauth.kakao.com/oauth/authorize?client_id=1550477d27cd178f856e5f3e0da6a93b&redirect_uri=http://localhost:9090/auth/kakao/callback&response_type=code" >
