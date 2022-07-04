@@ -13,6 +13,9 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
+    <meta name="${_csrf.parameterName}" content="${_csrf.token}">
+    <meta name="_csrf_header" content="${_csrf.headerName}">
+
     <title>Insert title here</title>
     <!-- Latest compiled and minified CSS -->
     <link
@@ -30,7 +33,8 @@ pageEncoding="UTF-8"%>
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
   </head>
   <body>
-
+	<div id="typeCsrf" data-name="${_csrf.headerName}"></div>
+	<div id="token" data-name="${_csrf.token}"></div>
     <nav
       class="navbar navbar-expand-md bg-dark navbar-dark"
     >

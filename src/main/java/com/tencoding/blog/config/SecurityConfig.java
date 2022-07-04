@@ -18,6 +18,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import com.tencoding.blog.auth.PrincipalDetailService;
 
@@ -49,9 +50,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	// configure 메소드를 통해 어떤 요청에 대해서는 로그인을 요구하고, 어떤 요청에 대해서 로그인을 요구하지 않을지 설정한다.
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
+		//http.csrf().disable()
+		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+		.and()
 		.authorizeRequests() // 요청에 대한 보안검사 시작
-		.antMatchers("/","/js/**","/css/**", "/image/**" ,"/auth/**", "/dummy/**").permitAll() // 아래와 같은 주소체계는 모두 허용한다.
+		.antMatchers("/","/js/**","/css/**", "/image/**" ,"/auth/**", "/dummy/**","/test/**").permitAll() // 아래와 같은 주소체계는 모두 허용한다.
 		.anyRequest().authenticated() // 어떠한 요청에도 보안검사 실행
 		.and()
 		.formLogin() // 보안검증은 form login으로 하겠다.
