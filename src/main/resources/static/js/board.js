@@ -200,5 +200,4 @@ function xSSCheck(str, level) {
     return str;
 }
 
-
 index.init();

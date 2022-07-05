@@ -44,7 +44,16 @@ spring:
     user:
       name: test
       password: 1234
+
+  servlet:
+    multipart:
+      max-file-size: 20MB # 파일하나의 파일 용량
+      max-request-size: 200MB # 한번에 동시에 보낼 수 있는 파일 용량
       
+file:
+    path: C:\springImgDir\tenoblog\upload\
+         
+            
 teco:
   key: CD016E3086B3B013A18A042A7B76F6CFDD3A1561DF8DCA08BBC2FD4116775BAA724CADB25BB98AE3FBCCFB71836D29B78E9AD3F64C672A7A5A41DF7565B5312F
       
