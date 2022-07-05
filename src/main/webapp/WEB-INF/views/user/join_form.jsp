@@ -5,7 +5,6 @@ file="../layout/header.jsp" %>
 
 <div class="container">
   <form action="/auth/joinProc" method="post">
-  	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }"/>
     <div class="form-group">
       <label for="username">user name:</label>
       <input

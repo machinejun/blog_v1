@@ -54,10 +54,6 @@ public class UserService {
 	
 	@Transactional
 	public int updateUser(User user) {
-		// 카카오가 수정이 들어오면 무시 ~~~~ 처리
-		if(user.getOauth()== null || user.getOauth().equals("")) {
-			return 1;
-		}
 		User userEntity = userRepository.findById(user.getId()).orElseThrow(() -> {
 			return new RuntimeException("업데이트가 실패하였습니다.");
 		});
@@ -65,7 +61,9 @@ public class UserService {
 		userEntity.setEmail(user.getEmail());
 		
 //		Authentication authentication = AuthenticationManager.authenticate(new UsernamePasswordAuthenticationToken(, userEntity))
-
+		
+		
+		
 		return 1;
 	}
 	

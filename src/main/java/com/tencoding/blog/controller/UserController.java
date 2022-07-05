@@ -1,7 +1,5 @@
 package com.tencoding.blog.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -56,13 +53,13 @@ public class UserController {
 		return "/user/join_form";
 	}
 
-	@GetMapping("/logout")
-	public String logout(HttpServletRequest request, HttpServletResponse response) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if(authentication != null) {
-			new SecurityContextLogoutHandler().logout(request, response, authentication);
-		}
+	@GetMapping("/auth/logout")
+	public String logout() {
+		// 세션 정보를 제거 로그아웃 처리
+		// 새로운 페이지(처음 화면)로 갈수있게 처리
+		httpSession.invalidate();
 		return "redirect:/";
+		// rediret
 	}
 
 	@GetMapping("/user/update_form")

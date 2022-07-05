@@ -1,6 +1,3 @@
-let token2 = $("#token").data("name");
-let header2 = $("#typeCsrf").data("name");
-
 let index = {
 	init: function() {
 		$("#btn-save").bind("click", () => {
@@ -21,22 +18,18 @@ let index = {
 	},
 	
 	save: function() {
+		// 데이터 가져오기
 		let data = {
+			title: $("#title").val(),
+			content: $("#content").val(),
 			
-			title: xSSCheck($("#title").val(), 1),
-			content: $("#content").val()
 		}
-		
 		if(data.title == ""){
 			alert("제목은 공백일수 없습니다.")
 			return;
 		}
 		
 		$.ajax({
-			beforeSend: function(xhr) {
-				console.log("xhr: " + xhr)
-				xhr.setRequestHeader(header2, token2)
-			},
 			type: "POST",
 			url: "/api/board",
 			data: JSON.stringify(data),
@@ -57,14 +50,9 @@ let index = {
 	},
 	
 	deleteById: function(){
-		
 		let id = $("#board-id").text();
 		
 		$.ajax({
-			beforeSend: function(xhr) {
-				console.log("xhr: " + xhr)
-				xhr.setRequestHeader(header2, token2)
-			},
 			type:"DELETE",
 			url:"/api/board/" + id		
 		}).done(function(data){
@@ -81,10 +69,8 @@ let index = {
 	update: function() {
 		// 데이터 가져오기
 		
-		
 		let boardId = $("#id").val();
 		let data = {
-			
 			title: $("#title").val(),
 			content: $("#content").val()
 			
@@ -110,17 +96,9 @@ let index = {
 		})
 	},
 	
-	// csrf 활성화 후에는 헤더에 csrf 토큰값을 넣어야 정상 동작 합니다.
 	// `` 백틱(자바스크립트 변수를 문자열 안에 넣어서 사용할 수 있따.)
 	replySave: function() {
-		// 데이터 가져오기\
-		/*
-		let token = $("meta[name='_csrf']").attr("content");
-		let header = $("meta[name='_csrf_header']").attr("content");
-		*/
-		console.log("token: " + token);
-		console.log("header: " + header);
-		
+		// 데이터 가져오기
 		let data = {
 			boardId: $("#board-id").text(), 
 			content: $("#reply-content").val(),
@@ -133,10 +111,6 @@ let index = {
 		}
 		
 		$.ajax({
-			beforeSend: function(xhr) {
-				console.log("xhr: " + xhr)
-				xhr.setRequestHeader(header2, token2)
-			},
 			type: "POST",
 			url: `/api/board/${data.boardId}/reply`,
 			data: JSON.stringify(data),
@@ -188,16 +162,6 @@ function addReplyElemet(reply){
   	
   	$("#reply--box").prepend(childElement);
   	$("#reply-content").val("");
-}
-
-function xSSCheck(str, level) {
-    if (level == undefined || level == 0) {
-        str = str.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g,"");
-    } else if (level != undefined && level == 1) {
-        str = str.replace(/\</g, "&lt;");
-        str = str.replace(/\>/g, "&gt;");
-    }
-    return str;
 }
 
 

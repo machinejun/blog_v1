@@ -4,7 +4,6 @@
 	<div class="container">
 		<form class="form-group">
 			<div>
-				
 				<label for = "title">Title</label>
 				<input type ="text" class ="form-control" placeholder = "enter title"
 					name="title" id = "title">

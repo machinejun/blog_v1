@@ -7,7 +7,6 @@ file="../layout/header.jsp" %>
 <!-- loginProc를 만들지 않음 스프링 시큐리티가 가로채서 전달 -->
     <form action="/auth/loginProc" method="post">
       <div class="form-group">
-      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }"/>
         <label for="username">user name:</label>
         <input type="text" class="form-control" name = "username" placeholder="Enter username" id="username" value="tenco">
       </div>
