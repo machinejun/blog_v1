@@ -23,6 +23,7 @@ public class UserApiController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
+<<<<<<< HEAD
 	
 	@PutMapping("/user")
 	public ResponseDto<Integer> update(@RequestBody User user){
@@ -83,4 +84,17 @@ public class UserApiController {
 //		}
 //		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 //	}	
+=======
+	@PostMapping("/api/user")
+	public ResponseDto<Integer> save(@RequestBody User user) {
+		// validation 체크 해야함
+		System.out.println("UserApiController 호출됨!!!!!");
+		user.setRole(RoleType.USER);
+		
+		
+		int result = userService.saveUser(user);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), result);
+	}
+		
+>>>>>>> parent of 75973b1 (로그인(no security))
 }

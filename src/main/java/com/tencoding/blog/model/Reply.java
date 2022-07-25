@@ -33,11 +33,19 @@ public class Reply {
 	@Column(nullable = false, length = 200)
 	private String content;
 
+	@CreationTimestamp
+	private Timestamp createDate;
+
+	@ManyToOne
+	@JoinColumn(name = "userId")
+	private User user;
+
 	@ManyToOne // 여러개의 댓글은 하나의 게시글에 존재할 수 있다.
 	@JoinColumn(name = "boardId")
 	@JsonIgnoreProperties({"replys","userId"})
 	private Board board;
 
+<<<<<<< HEAD
 	@ManyToOne
 	@JoinColumn(name = "userId") // <---- Reply 테이블에 컬럼명이 된다.
 	@JsonIgnoreProperties({"password", "role", "email", "oauth"})
@@ -45,4 +53,6 @@ public class Reply {
 
 	@CreationTimestamp
 	private Timestamp createDate;
+=======
+>>>>>>> parent of 75973b1 (로그인(no security))
 }

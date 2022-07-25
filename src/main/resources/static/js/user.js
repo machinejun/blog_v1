@@ -4,6 +4,7 @@ let index = {
 		$("#btn-save").bind("click ", () => {
 			this.save();
 		});
+<<<<<<< HEAD
 		
 		//전통적인 로그인 방식일 때 사용한 부분
 		/*
@@ -16,6 +17,8 @@ let index = {
 		$("#btn-update").bind("click ", () => {
 			this.update();
 		});
+=======
+>>>>>>> parent of 75973b1 (로그인(no security))
 	},
 	
 	save: function(){
@@ -58,6 +61,7 @@ let index = {
 			console.log(status);
 			alert("회원가입에 실패하였습니다");
 		});
+<<<<<<< HEAD
 	},
 	/*
 	login: function() {
@@ -83,6 +87,8 @@ let index = {
 			alert("로그인에 실패하였습니다");
 			console.log(error);
 		});
+=======
+>>>>>>> parent of 75973b1 (로그인(no security))
 		
 	}
 	*/

@@ -1,9 +1,10 @@
 package com.tencoding.blog.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.tencoding.blog.model.RoleType;
 import com.tencoding.blog.model.User;
@@ -69,6 +70,7 @@ public class UserService {
 		return 1;
 	}
 	
+<<<<<<< HEAD
 	@Transactional(readOnly = true)
 	public User searchUser(String userName) {
 		User userEntity = userRepository.findByUsername(userName).orElseGet(() ->{
@@ -85,6 +87,8 @@ public class UserService {
 	
 	
 	
+=======
+>>>>>>> parent of 75973b1 (로그인(no security))
 	
 	
 	

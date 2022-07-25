@@ -14,6 +14,7 @@ file="../layout/header.jsp" %>
 
       <div class="form-group">
         <label for="password">password:</label>
+<<<<<<< HEAD
         <input type="password" class="form-control" name = "password" placeholder="Enter password" id="password" value="asd123">
       </div>
       <button id="btn-login" onsubmit="" type="submit" class="btn btn-primary">로그인</button>
@@ -26,3 +27,17 @@ file="../layout/header.jsp" %>
 <br/>
 <!--  <script src="/js/user.js"></script> -->
 <%@ include file="../layout/footer.jsp"%>
+=======
+        <input type="password" class="form-control" placeholder="Enter password" id="password">
+      </div>
+
+
+      <button type="button" class="btn btn-primary">로그인</button>
+    </form>
+</div>
+<br/>
+
+
+<%@ include file="../layout/footer.jsp"
+%>
+>>>>>>> parent of 75973b1 (로그인(no security))

@@ -26,7 +26,7 @@ spring:
       read-only: false
     
   jpa:
-    open-in-view: true   
+    open-in-view: true
     hibernate:
       ddl-auto: update
       naming:
