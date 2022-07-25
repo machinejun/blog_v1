@@ -9,5 +9,7 @@ public class TenoblogApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TenoblogApplication.class, args);
 	}
+	
+
 
 }

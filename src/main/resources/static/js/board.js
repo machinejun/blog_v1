@@ -1,5 +1,7 @@
 let token2 = $("#token").data("name");
 let header2 = $("#typeCsrf").data("name");
+let token = $("meta[name='_csrf']").attr("content");
+let header = $("meta[name='_csrf_header']").attr("content");
 
 let index = {
 	init: function() {
@@ -22,7 +24,6 @@ let index = {
 	
 	save: function() {
 		let data = {
-			
 			title: xSSCheck($("#title").val(), 1),
 			content: $("#content").val()
 		}
@@ -31,6 +32,7 @@ let index = {
 			alert("제목은 공백일수 없습니다.")
 			return;
 		}
+		
 		
 		$.ajax({
 			beforeSend: function(xhr) {
@@ -118,6 +120,8 @@ let index = {
 		let token = $("meta[name='_csrf']").attr("content");
 		let header = $("meta[name='_csrf_header']").attr("content");
 		*/
+		let token = $("meta[name='_csrf']").attr("content");
+		let header = $("meta[name='_csrf_header']").attr("content");
 		console.log("token: " + token);
 		console.log("header: " + header);
 		
@@ -135,7 +139,7 @@ let index = {
 		$.ajax({
 			beforeSend: function(xhr) {
 				console.log("xhr: " + xhr)
-				xhr.setRequestHeader(header2, token2)
+				xhr.setRequestHeader(header, token)
 			},
 			type: "POST",
 			url: `/api/board/${data.boardId}/reply`,
@@ -159,7 +163,13 @@ let index = {
 	
 	replyDelete: function(boardId, replyId) {
 		console.log(boardId+ "+" + replyId);
+		let token = $("meta[name='_csrf']").attr("content");
+		let header = $("meta[name='_csrf_header']").attr("content");
 		$.ajax({
+			beforeSend: function(xhr) {
+				console.log("xhr: " + xhr)
+				xhr.setRequestHeader(header, token)
+			},
 			type: "DELETE",
 			url: `/api/board/${boardId}/reply/${replyId}`,
 			dataType:'json'

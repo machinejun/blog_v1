@@ -49,5 +49,6 @@ public class BlogController {
 	public String temp1() {
 		return "/test";
 	}
-
+	
+ 
 }

@@ -50,9 +50,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	// configure 메소드를 통해 어떤 요청에 대해서는 로그인을 요구하고, 어떤 요청에 대해서 로그인을 요구하지 않을지 설정한다.
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		//http.csrf().disable()
-		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-		.and()
+		http.csrf().disable()
+//		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+//		.and()
 		.authorizeRequests() // 요청에 대한 보안검사 시작
 		.antMatchers("/","/js/**","/css/**", "/image/**" ,"/auth/**", "/dummy/**","/test/**").permitAll() // 아래와 같은 주소체계는 모두 허용한다.
 		.anyRequest().authenticated() // 어떠한 요청에도 보안검사 실행
@@ -60,17 +60,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.formLogin() // 보안검증은 form login으로 하겠다.
 		.loginPage("/auth/login_form") // 허용이 되지 않은 사용자가 오면 강제로 로그인 페이지로 보낸다.
 		.loginProcessingUrl("/auth/loginProc") // 로그인 처리 api 주소 설정
-		.defaultSuccessUrl("/")
-		.failureHandler(new AuthenticationFailureHandler() {
-			@Override
-			public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-					AuthenticationException exception) throws IOException, ServletException {
-			
-				response.setContentType("text/html; charset=utf-8");
-				response.getWriter().println("<script>alert('아이디&비빌번호 wrong'); history.back();</script>");
-				response.getWriter().flush();		
-			}
-		}); 
+		.defaultSuccessUrl("/");
+//		.failureHandler(new AuthenticationFailureHandler() {
+//			@Override
+//			public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+//					AuthenticationException exception) throws IOException, ServletException {
+//			
+//				response.setContentType("text/html; charset=utf-8");
+//				response.getWriter().println("<script>alert('아이디&비빌번호 wrong'); history.back();</script>");
+//				response.getWriter().flush();		
+//			}
+//		}); 
 	}
 		// 시프링 시큐리티가 해동 주소로 요청이 오면 가로채서 대신 로그인 처리를 해준다.
 		// 단 이 동작하기 위해서는 만들어야할 클래스가 있다.
