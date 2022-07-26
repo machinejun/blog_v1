@@ -62,7 +62,7 @@ public class Board {
 	// mappedBy = "board" 는 reply 테이블에 필드 이름이다.
 	// mappedBy = 연관관계의 주인이 아니다. (FK가 아니다)
 	// DB에 컬럼을 만들지 마세요
-<<<<<<< HEAD
+
 	
 	
 	// mappedBy 안하면 테이블 생성됨 board_reply ㅋㅋㅋㅋㅋㅋ 개열받네
@@ -70,12 +70,6 @@ public class Board {
 	@JsonIgnoreProperties({"board","user"})  // reply안에 있는 board getter 무시해라 = 값을 가지고 오지 않는다. 무한 참조 막기
 	@OrderBy("id DESC")
 	private List<Reply> replys;
-	
-	
-=======
 
-	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
-	private List<Reply> reply;
->>>>>>> parent of 75973b1 (로그인(no security))
 
 }

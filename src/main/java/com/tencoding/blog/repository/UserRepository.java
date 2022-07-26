@@ -18,7 +18,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	// select
 	// update
 	// delete
-<<<<<<< HEAD
+
 	
 	// spring JPA 네이밍 전략
 	// select * from user where username = ?1 and password = ?2;
@@ -33,8 +33,5 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	
 	
-	
-	
-=======
->>>>>>> parent of 75973b1 (로그인(no security))
+
 }

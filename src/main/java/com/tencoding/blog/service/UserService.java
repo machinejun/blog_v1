@@ -69,9 +69,7 @@ public class UserService {
 
 		return 1;
 	}
-	
-<<<<<<< HEAD
-	@Transactional(readOnly = true)
+
 	public User searchUser(String userName) {
 		User userEntity = userRepository.findByUsername(userName).orElseGet(() ->{
 			return new User();
@@ -84,13 +82,6 @@ public class UserService {
 //		// 레파지토리 select
 //		return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
 //	}
-	
-	
-	
-=======
->>>>>>> parent of 75973b1 (로그인(no security))
-	
-	
 	
 	
 }

@@ -6,11 +6,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tencoding.blog.dto.ResponseDto;
+import com.tencoding.blog.model.RoleType;
 import com.tencoding.blog.model.User;
 import com.tencoding.blog.service.UserService;
 
@@ -23,7 +25,7 @@ public class UserApiController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
-<<<<<<< HEAD
+
 	
 	@PutMapping("/user")
 	public ResponseDto<Integer> update(@RequestBody User user){
@@ -84,7 +86,7 @@ public class UserApiController {
 //		}
 //		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 //	}	
-=======
+
 	@PostMapping("/api/user")
 	public ResponseDto<Integer> save(@RequestBody User user) {
 		// validation 체크 해야함
@@ -95,6 +97,5 @@ public class UserApiController {
 		int result = userService.saveUser(user);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), result);
 	}
-		
->>>>>>> parent of 75973b1 (로그인(no security))
+
 }
